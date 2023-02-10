@@ -13,6 +13,8 @@ import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { ProductService } from './shared/product.service';
+import { MatChipsModule } from '@angular/material/chips';
+
 //import { ProductCreateStepOneComponent } from './product-create/product-create-step-one/product-create-step-one.component';
 //import { ProductCreateStepTwoComponent } from './product-create/product-create-step-two/product-create-step-two.component';
 // import { MainNavComponent } from './main-nav/main-nav.component';
@@ -48,6 +50,7 @@ import { ProductService } from './shared/product.service';
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
+    MatChipsModule,
     //BrowserAnimationsModule,
     //MatButtonModule,
     // LayoutModule,

@@ -8,7 +8,9 @@ import { Product } from './product.model';
 })
 export class ProductService {
   ProductFormForSave:Product=new Product();
-  fileToUpload:FileList=null;
+  fileToUpload=[];
+
+  StepCount:number=0;
 
   readonly rootURL = 'http://localhost:3000/product/';
   constructor(private http: HttpClient) { }

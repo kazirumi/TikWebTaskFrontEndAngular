@@ -13,6 +13,8 @@ export class ProductCreateStepOneComponent implements OnInit {
   constructor(public productService: ProductService) { }
 
   ngOnInit(): void {
+    this.productService.StepCount=1;
+    if(!this.productService.ProductFormForSave.category)
     this.productService.ProductFormForSave.category = { id: "", categoryName: "" };
     this.productService.getAllCategory().subscribe(
       (res: any) => {
@@ -30,15 +32,15 @@ export class ProductCreateStepOneComponent implements OnInit {
   }
 
   urls = [];
-  handleFileInput(file: FileList) {
-    this.productService.fileToUpload = file;
-
+  handleFileInput(eventTargetfiles) {
+    this.productService.fileToUpload = eventTargetfiles;
+      
       var reader= new FileReader();
       reader.onload=(event:any)=>{
         this.urls.push(event.target.result);
 
       }
-      reader.readAsDataURL(this.productService.fileToUpload.item(0));
+      reader.readAsDataURL(eventTargetfiles[0]);
     console.log(this.productService.fileToUpload);
     console.log(this.urls);
   }

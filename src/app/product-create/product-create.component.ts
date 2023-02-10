@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { element } from 'protractor';
+import { map } from 'rxjs/operators';
+import { FileService } from '../shared/FileService';
 import { ProductService } from '../shared/product.service';
 
 @Component({
@@ -9,14 +12,48 @@ import { ProductService } from '../shared/product.service';
 })
 export class ProductCreateComponent implements OnInit {
 
-  constructor(private productService:ProductService,private router:Router,private route:ActivatedRoute) { }
+  constructor(private productService:ProductService,private router:Router,private route:ActivatedRoute,private fileService:FileService) { }
 
   ngOnInit(): void {
   }
 
   GotoProductCreateStepTwo()
-  {
+  {   
+      if(this.productService.StepCount==1)
       this.router.navigate(['ProductCreateStepTwo'],{relativeTo:this.route});
+      
+      if(this.productService.StepCount==2){
+        this.SaveProduct();
+      }
+  }
+  FilePathList=[];
+
+  async SaveProduct(){
+    await this.fileSave()
   }
 
+  async fileSave(){
+   this.fileService.SaveFile(this.productService.fileToUpload).pipe(map((element:any)=>{
+    const data = element.map(obj => ({
+      path: obj.path.toString().split("\\").join("/")
+    }));
+    return data;
+   })).subscribe(
+    filesSavedPathArray=>{
+      //file uploaded success full
+      console.log(filesSavedPathArray);
+      this.FilePathList=filesSavedPathArray;
+      this.productService.ProductFormForSave.imagePath=[{path:"",_id:""}]
+      this.productService.ProductFormForSave.imagePath.splice(0,1);
+      this.FilePathList.forEach(element => {
+        let filePathObj={path:element.path,_id:""}
+        this.productService.ProductFormForSave.imagePath.push(filePathObj);
+      });
+      console.log(this.productService.ProductFormForSave);
+    },
+    err=>{
+      console.log(err);
+    }
+   );
+  }
 }

@@ -23,7 +23,10 @@
 
                         </div>
 
-                        
+                        <!-- <div class="form-group">
+                            <button type="submit" class="submit btn btn-lg btn-block btn-success"
+                                [disabled]="form.invalid">Login</button>
+                        </div> -->
 
                     </form>
                 </div>
@@ -46,8 +49,20 @@
                                 <br>
                             </form>
                         </div>
-                        <div class="row col-md-12">
-
+                        <div class="row col-md-12 ml-2">
+                            <!-- *ngFor="let option of options" [value]="option" -->
+                            <!-- <mat-chip-list  >
+                                <mat-chip  #d="SelectedMatChip" *ngFor="let option of productService.ProductFormForSave.varient.varientSubName" [value]="option.Name" ">
+                                    {{option.Name}}
+                                </mat-chip>
+                            </mat-chip-list> -->
+                            <p *ngFor="let option of productService.ProductFormForSave.varient.varientSubName">{{option.Name}}</p><br>
+                            <label *ngIf="productService.ProductFormForSave.varient.varientName">Add {{productService.ProductFormForSave.varient.varientName}}</label>
+                            <mat-chip-list  selectable multiple>
+                                <mat-chip  #c="matChip" *ngFor="let option of varientSubNameList" [value]="option.Name" (click)="toggleSelection(c)">
+                                    {{option.Name}}
+                                </mat-chip>
+                            </mat-chip-list>
                         </div>
 
                     </div>
