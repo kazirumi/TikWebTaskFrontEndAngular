@@ -38,8 +38,13 @@ export class ProductDatatableComponent implements AfterViewInit,OnInit {
       
     
   }
-  getImage(){
+  getImage(imagePath){
+    console.log(imagePath[0].path)
+    if(!imagePath[0].path)
     return `http://localhost:3000/Image/pasta.jpg`;
+    else
+    return `http://localhost:3000/${imagePath[0].path}`;
+
   }
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;

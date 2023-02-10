@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { element } from 'protractor';
 import { map } from 'rxjs/operators';
 import { FileService } from '../shared/FileService';
+import { Product } from '../shared/product.model';
 import { ProductService } from '../shared/product.service';
 
 @Component({
@@ -48,6 +49,7 @@ export class ProductCreateComponent implements OnInit {
       this.productService.ProductFormForSave.imagePath=[{path:""}]
       this.productService.ProductFormForSave.imagePath.splice(0,1);
       this.FilePathList.forEach(element => {
+        element.path=element.path.toString().split("/")[1]+"/"+element.path.toString().split("/")[2];
         let filePathObj={path:element.path}
         this.productService.ProductFormForSave.imagePath.push(filePathObj);
       });
@@ -64,6 +66,10 @@ export class ProductCreateComponent implements OnInit {
     console.log("Final Start");
     this.productService.FinalSaveProduct().subscribe(res=>{
       console.log("Final Save Done")
+      this.productService.ProductFormForSave=new Product();
+      this.productService.fileToUpload=[];
+      this.productService.StepCount=0;
+      this.router.navigate(["productlist"]);
     },
     err=>{
       console.log(err);
