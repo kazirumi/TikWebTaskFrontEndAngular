@@ -29,7 +29,9 @@ export class ProductCreateComponent implements OnInit {
   FilePathList=[];
 
   async SaveProduct(){
-    await this.fileSave()
+    this.productService.ProductFormForSave.status="active";
+    await this.fileSave();
+    
   }
 
   async fileSave(){
@@ -43,17 +45,29 @@ export class ProductCreateComponent implements OnInit {
       //file uploaded success full
       console.log(filesSavedPathArray);
       this.FilePathList=filesSavedPathArray;
-      this.productService.ProductFormForSave.imagePath=[{path:"",_id:""}]
+      this.productService.ProductFormForSave.imagePath=[{path:""}]
       this.productService.ProductFormForSave.imagePath.splice(0,1);
       this.FilePathList.forEach(element => {
-        let filePathObj={path:element.path,_id:""}
+        let filePathObj={path:element.path}
         this.productService.ProductFormForSave.imagePath.push(filePathObj);
       });
       console.log(this.productService.ProductFormForSave);
+      this.finalSave();
     },
     err=>{
       console.log(err);
     }
    );
+  }
+
+  finalSave(){
+    console.log("Final Start");
+    this.productService.FinalSaveProduct().subscribe(res=>{
+      console.log("Final Save Done")
+    },
+    err=>{
+      console.log(err);
+    }
+    );
   }
 }

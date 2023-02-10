@@ -3,7 +3,7 @@ export class Product {
     price: number;
     stock: number;
     status: string;
-    imagePath: [{ path: string, _id: string }];
+    imagePath: [{ path: string }];
 
     category: {
         id: string,
@@ -19,12 +19,10 @@ export class Product {
 
         ]
     };
-    _id: string;
 
     collectionName: string;
 
     description: string;
     videoURL: string;
 
-    __v: number;
 }

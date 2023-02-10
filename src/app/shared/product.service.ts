@@ -24,5 +24,9 @@ export class ProductService {
   getAllProduct() {
     return this.http.get(this.rootURL);
   }
+
+  FinalSaveProduct(){
+    return this.http.post(this.rootURL,this.ProductFormForSave);
+  }
   
 }
