@@ -20,7 +20,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
-import { SideNavComponent } from './side-nav/side-nav.component';
+
 
 
 
@@ -32,7 +32,7 @@ import { SideNavComponent } from './side-nav/side-nav.component';
     AppComponent,
     routingComponents,
     ProductDatatableComponent,
-    SideNavComponent,
+    
     //ProductCreateStepOneComponent,
     //ProductCreateStepTwoComponent,
     // MainNavComponent,
