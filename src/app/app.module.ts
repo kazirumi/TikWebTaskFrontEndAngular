@@ -14,16 +14,14 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { ProductService } from './shared/product.service';
 import { MatChipsModule } from '@angular/material/chips';
+import { AuthInterceptor } from './auth/auth.interceptor';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatDividerModule } from '@angular/material/divider';
+import { SideNavComponent } from './side-nav/side-nav.component';
 
-//import { ProductCreateStepOneComponent } from './product-create/product-create-step-one/product-create-step-one.component';
-//import { ProductCreateStepTwoComponent } from './product-create/product-create-step-two/product-create-step-two.component';
-// import { MainNavComponent } from './main-nav/main-nav.component';
-// import { LayoutModule } from '@angular/cdk/layout';
-// import { MatToolbarModule } from '@angular/material/toolbar';
- //import { MatButtonModule } from '@angular/material/button';
-// import { MatSidenavModule } from '@angular/material/sidenav';
-// import { MatIconModule } from '@angular/material/icon';
-// import { MatListModule } from '@angular/material/list';
 
 
 
@@ -34,6 +32,7 @@ import { MatChipsModule } from '@angular/material/chips';
     AppComponent,
     routingComponents,
     ProductDatatableComponent,
+    SideNavComponent,
     //ProductCreateStepOneComponent,
     //ProductCreateStepTwoComponent,
     // MainNavComponent,
@@ -52,16 +51,21 @@ import { MatChipsModule } from '@angular/material/chips';
     MatSortModule,
     MatChipsModule,
     //BrowserAnimationsModule,
-    //MatButtonModule,
+    MatButtonModule,
     // LayoutModule,
-    // MatToolbarModule,
+     MatToolbarModule,
     
-    // MatSidenavModule,
-    // MatIconModule,
+     MatSidenavModule,
+     MatIconModule,
+     MatDividerModule
     // MatListModule
     
   ],
-  providers: [ProductService],
+  providers: [ProductService,{
+    provide:HTTP_INTERCEPTORS,
+    useClass:AuthInterceptor,
+    multi:true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

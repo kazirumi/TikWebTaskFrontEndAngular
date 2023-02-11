@@ -15,7 +15,7 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 export class ProductCreateStepTwoComponent implements OnInit {
   variantList: any[] = [];
   varientSubNameList: any[] = [];
-  SingleVariantIndex: number;
+  // SingleVariantIndex: number;
   constructor(public productService: ProductService) { }
 
 
@@ -49,12 +49,12 @@ export class ProductCreateStepTwoComponent implements OnInit {
     this.varientSubNameList = [];
     this.productService.ProductFormForSave.varient.varientSubName=[{Name:""}]
     this.variantList.forEach((element, i) => {
-      if (i == this.SingleVariantIndex) {
+      if (i == this.productService.SingleVariantIndex) {
         this.productService.ProductFormForSave.varient.id = element.id;
         this.productService.ProductFormForSave.varient.varientName = element.varientName;
       }
     });
-    this.varientSubNameList = this.variantList[this.SingleVariantIndex].varientSubName;
+    this.varientSubNameList = this.variantList[this.productService.SingleVariantIndex].varientSubName;
     let DeletedIndex = this.productService.ProductFormForSave.varient.varientSubName.findIndex(x => x.Name == "");
     
     this.productService.ProductFormForSave.varient.varientSubName.splice(DeletedIndex, 1);

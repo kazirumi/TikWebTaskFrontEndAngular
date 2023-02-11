@@ -9,7 +9,7 @@ import { NgForm } from '@angular/forms';
 })
 export class ProductCreateStepOneComponent implements OnInit {
   categoryList: any[] = [];
-  SingleCategory: number;
+  // SingleCategory: number;
   constructor(public productService: ProductService) { }
 
   ngOnInit(): void {
@@ -31,24 +31,25 @@ export class ProductCreateStepOneComponent implements OnInit {
     );
   }
 
-  urls = [];
+  // urls = [];
   handleFileInput(eventTargetfiles) {
     this.productService.fileToUpload = eventTargetfiles;
       
+    this.productService.urls=[];
       var reader= new FileReader();
       reader.onload=(event:any)=>{
-        this.urls.push(event.target.result);
+        this.productService.urls.push(event.target.result);
 
       }
       reader.readAsDataURL(eventTargetfiles[0]);
     console.log(this.productService.fileToUpload);
-    console.log(this.urls);
+    console.log(this.productService.urls);
   }
 
 
   onSubmit(form: NgForm) {
     console.log(this.productService.ProductFormForSave);
-    console.log(this.SingleCategory)
+    //console.log(this.SingleCategory)
 
 
 
@@ -56,7 +57,7 @@ export class ProductCreateStepOneComponent implements OnInit {
 
   setCategory() {
     this.categoryList.forEach((element, i) => {
-      if (i == this.SingleCategory) {
+      if (i == this.productService.SingleCategory) {
         this.productService.ProductFormForSave.category.id = element.id;
         this.productService.ProductFormForSave.category.categoryName = element.categoryName;
       }

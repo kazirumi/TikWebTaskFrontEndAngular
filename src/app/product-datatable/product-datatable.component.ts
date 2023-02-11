@@ -39,7 +39,7 @@ export class ProductDatatableComponent implements AfterViewInit,OnInit {
     
   }
   getImage(imagePath){
-    console.log(imagePath[0].path)
+    
     if(!imagePath[0].path)
     return `http://localhost:3000/Image/pasta.jpg`;
     else

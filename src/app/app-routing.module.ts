@@ -10,7 +10,7 @@ const routes: Routes = [
   {path:'',redirectTo:'/login',pathMatch:'full' },
   {path:'login',component:LoginComponent},
   {path:'productlist',component:ProductComponent,canActivate:[AuthGuard]},
-  {path:'productcreate',component:ProductCreateComponent,
+  {path:'productcreate',component:ProductCreateComponent,canActivate:[AuthGuard],
   children: [
     {
       path: '', // child route path

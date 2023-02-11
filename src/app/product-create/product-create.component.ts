@@ -69,11 +69,23 @@ export class ProductCreateComponent implements OnInit {
       this.productService.ProductFormForSave=new Product();
       this.productService.fileToUpload=[];
       this.productService.StepCount=0;
+      this.productService.SingleVariantIndex=0;
+      this.productService.SingleCategory=0;
+      this.productService.urls=[];
       this.router.navigate(["productlist"]);
     },
     err=>{
       console.log(err);
     }
     );
+  }
+  ResetForm(){
+    this.productService.ProductFormForSave=new Product();
+      this.productService.fileToUpload=[];
+      this.productService.StepCount=0;
+      this.productService.SingleVariantIndex=0;
+      this.productService.SingleCategory=0;
+      this.productService.urls=[];
+      this.router.navigate(["productlist"]);
   }
 }

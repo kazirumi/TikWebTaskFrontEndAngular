@@ -11,6 +11,9 @@ export class ProductService {
   fileToUpload=[];
 
   StepCount:number=0;
+  SingleVariantIndex: number;
+  SingleCategory: number;
+  urls = [];
 
   readonly rootURL = 'http://localhost:3000/product/';
   constructor(private http: HttpClient) { }

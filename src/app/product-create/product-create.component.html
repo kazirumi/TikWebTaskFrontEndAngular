@@ -1,12 +1,22 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">Navbar</a>
+    <button
+    mat-icon-button
+    *ngIf="sidenav.mode === 'side'"
+    (click)="sidenav.toggle()"
+  >
+    <mat-icon *ngIf="!sidenav.opened"> menu </mat-icon>
+    <mat-icon *ngIf="sidenav.opened"> close </mat-icon>
+  </button>
+  <h3>Add New Product</h3>
+    <!-- <a class="navbar-brand" href="#">Navbar</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
-    </button>
+    </button> -->
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
+        <div class="navbar-nav mr-auto"></div>
+        <!-- <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
                 <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
             </li>
@@ -28,15 +38,60 @@
             <li class="nav-item">
                 <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
             </li>
-        </ul>
+        </ul> -->
         <div class="form-inline my-2 my-lg-0">
             
-            <button class="btn btn-outline-success mr-2 my-2 my-sm-0" type="submit">Discard</button>
+            <button class="btn btn-outline-success mr-2 my-2 my-sm-0" (click)="ResetForm()">Discard</button>
             <button class="btn  btn-success my-2 my-sm-0" (click)="GotoProductCreateStepTwo()">Save</button>
 
         </div>
     </div>
 </nav>
-<ng-container>
+<mat-sidenav-container>
+    <!-- <mat-sidenav  mode="side" class="mat-elevation-z8" opened="true"> -->
+    <mat-sidenav mode="side"  #sidenav="matSidenav" class="mat-elevation-z8" opened="true">
+
+      <!-- <img
+        class="avatar mat-elevation-z8"
+        src="https://source.unsplash.com/c_GmwfHBDzk/200x200"
+      />
+  
+      <h4 class="name">John Smith</h4>
+      <p class="designation">Software Engineer</p>
+   -->
+      <mat-divider></mat-divider>
+  
+      <button mat-button class="menu-button" routerLink="/home">
+        <mat-icon>home</mat-icon>
+        <span>Home</span>
+      </button>
+      <button mat-button class="menu-button" (click)="ResetForm()">
+        <mat-icon>person</mat-icon>
+        <span>Product</span>
+      </button>
+      <button mat-button class="menu-button" routerLink="/about">
+        <mat-icon>info</mat-icon>
+        <span>About</span>
+      </button>
+  
+      <mat-divider></mat-divider>
+  
+      <button mat-button class="menu-button" routerLink="/help">
+        <mat-icon>help</mat-icon>
+        <span>Help</span>
+      </button>
+    </mat-sidenav>
+    <mat-sidenav-content>
+      <!-- <div class="content mat-elevation-z8">
+    
+            <router-outlet></router-outlet>
+       
+      </div> -->
+      <ng-container>
+        <router-outlet></router-outlet>
+    </ng-container>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+<!-- <ng-container>
     <router-outlet></router-outlet>
-</ng-container>
+</ng-container> -->
