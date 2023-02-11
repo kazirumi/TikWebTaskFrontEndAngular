@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserAuthenticationService } from "../shared/user-authentication.service";
+import * as alertifyjs from "alertifyjs";
 
 @Component({
   selector: 'app-login',
@@ -25,10 +26,12 @@ export class LoginComponent implements OnInit {
         console.log(res);
         localStorage.setItem("token",res.accesstoken);
         localStorage.setItem("refreshToken",res.refreshtoken);
+        alertifyjs.success("Login Successfull");
         this.router.navigate(['productlist']);
       },
       err=>{
-        console.log(err);
+        alertifyjs.error(err.error.toString());
+        console.log(err.error);
       }
     );
   }

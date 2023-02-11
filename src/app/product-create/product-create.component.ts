@@ -5,6 +5,7 @@ import { map } from 'rxjs/operators';
 import { FileService } from '../shared/FileService';
 import { Product } from '../shared/product.model';
 import { ProductService } from '../shared/product.service';
+import * as alertifyjs from "alertifyjs";
 
 @Component({
   selector: 'app-product-create',
@@ -57,6 +58,8 @@ export class ProductCreateComponent implements OnInit {
       this.finalSave();
     },
     err=>{
+      alertifyjs.error("Product Image could not be saved");
+      alertifyjs.error(err.error);
       console.log(err);
     }
    );
@@ -64,8 +67,10 @@ export class ProductCreateComponent implements OnInit {
 
   finalSave(){
     console.log("Final Start");
+  
     this.productService.FinalSaveProduct().subscribe(res=>{
       console.log("Final Save Done")
+      alertifyjs.success("Product Saved Successfully")
       this.productService.ProductFormForSave=new Product();
       this.productService.fileToUpload=[];
       this.productService.StepCount=0;
@@ -75,6 +80,9 @@ export class ProductCreateComponent implements OnInit {
       this.router.navigate(["productlist"]);
     },
     err=>{
+      alertifyjs.error("Product could not be saved");
+      alertifyjs.error(err.error);
+
       console.log(err);
     }
     );
